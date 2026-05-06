@@ -1,0 +1,28 @@
+def find_min_max(arr, low, high):
+    # Base case: one element
+    if low == high:
+        return arr[low], arr[low]
+
+    # Base case: two elements
+    if high == low + 1:
+        if arr[low] < arr[high]:
+            return arr[low], arr[high]
+        else:
+            return arr[high], arr[low]
+
+    mid = (low + high) // 2
+
+    min1, max1 = find_min_max(arr, low, mid)
+    min2, max2 = find_min_max(arr, mid + 1, high)
+
+    return min(min1, min2), max(max1, max2)
+
+
+# MAIN
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter elements: ").split()))
+
+minimum, maximum = find_min_max(arr, 0, n - 1)
+
+print("Minimum:", minimum)
+print("Maximum:", maximum)
